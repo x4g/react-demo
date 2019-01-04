@@ -1,21 +1,18 @@
 import React, { Component } from "react";
+import ClickableTag from './ClickableTag';
 
 class TagList extends Component {
-
-
-
   render() {
-      console.log(this.props.tags);
     return (
-    <div>
+      <div>
         {this.props.tags.map(function(tag, idx) {
-            return (
-                <div key={idx}>
-                    <p>{tag}</p>
-                </div>
-            );
+          return (
+            <div key={idx}>
+              <ClickableTag tag={tag} />
+            </div>
+          );
         })}
-    </div>
+      </div>
     );
   }
 }

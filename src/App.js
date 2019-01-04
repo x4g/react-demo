@@ -13,15 +13,13 @@ class App extends Component {
           <h1>Demo</h1>
           <ul className="header">
             <li>
-              <NavLink exact to="/">
-                Home
-              </NavLink>
+              <NavLink exact to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="/assets">Assets</NavLink>
+              <NavLink exact to="/assets">Assets</NavLink>
             </li>
             <li>
-              <NavLink to="/tags">Tags</NavLink>
+              <NavLink exact to="/tags">Tags</NavLink>
             </li>
             <li>
               <NavLink to="/config">Config</NavLink>

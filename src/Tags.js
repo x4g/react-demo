@@ -6,23 +6,24 @@ class Tags extends Component {
   constructor() {
     super();
     this.state = {
-      tags: ['g1', 'g2']
+      tags: []
     };
   }
 
-  render() {
-    // axios
-    //   .get("http://10.189.184.144:8080/tags")
-    //   .then(response => {
-    //     var mappedTagNames = response.data.content.map(item => item.name);
-    //     this.setState({
-    //       tags: mappedTagNames
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+  componentWillMount() {
+    axios
+      .get("http://10.189.184.144:8080/tags")
+      .then(response => {
+        this.setState({
+          tags: response.data.content
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
+  render() {
     return (
       <div>
         <TagList tags={this.state.tags} />
