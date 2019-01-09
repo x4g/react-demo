@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-import CardStack from "./CardStack";
-import AppConf from './config.json'
+import CardStack from "../common/CardStack";
+import AppConf from '../../config.json'
 
-const URL = AppConf.DOMAIN + '/assets'
+const URL = AppConf.ASSETS_TAGS + '/assets'
 
-class Assets extends Component {
+class AssetModule extends Component {
   constructor() {
     super();
     this.state = {
@@ -41,4 +41,4 @@ class Assets extends Component {
   }
 }
 
-export default Assets;
+export default AssetModule;

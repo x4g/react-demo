@@ -1,22 +1,30 @@
 import React, { Component } from "react";
-import AppConfig from "./config.json";
+import AppConfig from "../../config.json";
 import axios from "axios";
 
-const URL = AppConfig.DOMAIN + "/tags";
+const TAG_URL = AppConfig.ASSETS_TAGS + "/tags";
+const TAG_VALUE_URL = AppConfig.TAGVALUES + "/tagvalues"
 
 class TagDetail extends Component {
   constructor() {
     super();
-    this.state = { detail: {} };
+    this.state = { 
+      detail: {},
+      values: []
+    };
   }
+
   componentDidMount() {
     const tagId = this.props.match.params.id;
-    console.log("tag id for http request: " + tagId + " type: " + typeof tagId);
+    const tagName = this.props.match.params.name;
 
-    axios.get(URL + "/" + tagId).then(response => {
-      console.log("tag response: " + response.data);
-      console.log(response.data.id);
+    axios.get(TAG_URL + "/" + tagId).then(response => {
       this.setState({ detail: response.data });
+    });
+
+    axios.get(TAG_VALUE_URL + "/" + tagName).then(response => {
+      this.setState({values: response.data});
+      console.log("this.state.values: " + this.state.values);
     });
   }
 
@@ -54,25 +62,25 @@ class TagDetail extends Component {
             </tr>
             <tr>
               <th>
-                <b>MAX:</b>
+                <b>MAX VALUE:</b>
               </th>
               <th>{this.state.detail.max}</th>
             </tr>
             <tr>
               <th>
-                <b>MIN:</b>
+                <b>MIN VALUE:</b>
               </th>
               <th>{this.state.detail.min}</th>
             </tr>
             <tr>
               <th>
-                <b>FREQ:</b>
+                <b>FREQUENCE:</b>
               </th>
-              <th>{this.state.detail.frequence}</th>
+              <th>{this.state.detail.frequence}s</th>
             </tr>
             <tr>
               <th>
-                <b>TEMP:</b>
+                <b>TEMP VALUE:</b>
               </th>
               <th>{this.state.detail.temp_value}</th>
             </tr>

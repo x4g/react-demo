@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import TagList from "./TagList";
-import AppConfig from './config.json';
+import AppConfig from '../../config.json';
 
-const URL = AppConfig.DOMAIN + '/tags';
+const URL = AppConfig.ASSETS_TAGS + '/tags';
 
-class Tags extends Component {
+class TagModule extends Component {
   constructor() {
     super();
     this.state = {
@@ -36,4 +36,4 @@ class Tags extends Component {
   }
 }
 
-export default Tags;
+export default TagModule;

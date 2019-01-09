@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Route, NavLink, HashRouter } from "react-router-dom";
-import Home from "./Home";
-import Assets from "./Assets";
-import Tags from "./Tags";
-import Config from "./Config";
-import TagDetail from './TagDetail'
+import HomeModule from "./modules/home/HomeModule";
+import AssetModule from "./modules/asset/AssetModule";
+import TagModule from "./modules/tag/TagModule";
+import ConfigModule from "./modules/config/ConfigModule";
+import TagDetail from './modules/tag/TagDetail'
 
 class App extends Component {
   render() {
@@ -27,11 +27,11 @@ class App extends Component {
             </li>
           </ul>
           <div className="content">
-            <Route exact path="/" component={Home} />
-            <Route path="/assets" component={Assets} />
-            <Route path="/tags" exact component={Tags} />
+            <Route exact path="/" component={HomeModule} />
+            <Route path="/assets" component={AssetModule} />
+            <Route path="/tags" exact component={TagModule} />
             <Route path="/tags/:id" component={TagDetail} />
-            <Route path="/config" component={Config} />
+            <Route path="/config" component={ConfigModule} />
           </div>
         </div>
       </HashRouter>

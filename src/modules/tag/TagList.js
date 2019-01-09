@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ClickableTag from './ClickableTag';
+import Tag from './Tag';
 
 class TagList extends Component {
   render() {
@@ -8,7 +8,7 @@ class TagList extends Component {
         {this.props.tags.map(function(tag, idx) {
           return (
             <div key={idx}>
-              <ClickableTag tag={tag} />
+              <a href={"/#/tags/" + tag.id} ><Tag tag={tag} /></a>
             </div>
           );
         })}

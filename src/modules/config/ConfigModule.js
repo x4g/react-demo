@@ -1,6 +1,6 @@
 import React, { Component } from "react";
  
-class Config extends Component {
+class ConfigModule extends Component {
   render() {
     return (
       <div>
@@ -13,4 +13,4 @@ class Config extends Component {
   }
 }
  
-export default Config;
+export default ConfigModule;

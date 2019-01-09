@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import no_image from './images/noimage.jpg'
+import no_image from '../../images/noimage.jpg'
 
 class Card extends Component {
 
