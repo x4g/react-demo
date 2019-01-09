@@ -4,6 +4,7 @@ import Home from "./Home";
 import Assets from "./Assets";
 import Tags from "./Tags";
 import Config from "./Config";
+import TagDetail from './TagDetail'
 
 class App extends Component {
   render() {
@@ -28,7 +29,8 @@ class App extends Component {
           <div className="content">
             <Route exact path="/" component={Home} />
             <Route path="/assets" component={Assets} />
-            <Route path="/tags" component={Tags} />
+            <Route path="/tags" exact component={Tags} />
+            <Route path="/tags/:id" component={TagDetail} />
             <Route path="/config" component={Config} />
           </div>
         </div>

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import TagList from "./TagList";
+import AppConfig from './config.json';
+
+const URL = AppConfig.DOMAIN + '/tags';
 
 class Tags extends Component {
   constructor() {
@@ -12,7 +15,7 @@ class Tags extends Component {
 
   componentWillMount() {
     axios
-      .get("http://10.189.184.144:8080/tags")
+      .get(URL)
       .then(response => {
         this.setState({
           tags: response.data.content
@@ -27,6 +30,7 @@ class Tags extends Component {
     return (
       <div>
         <TagList tags={this.state.tags} />
+
       </div>
     );
   }

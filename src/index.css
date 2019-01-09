@@ -108,3 +108,9 @@ ul.header li a {
 .active {
   background-color: #0099FF;
 }
+
+th {
+  font-style: normal;
+  text-align: left;
+  padding: 5px;
+}

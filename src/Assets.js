@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import CardStack from "./CardStack";
+import AppConf from './config.json'
+
+const URL = AppConf.DOMAIN + '/assets'
 
 class Assets extends Component {
   constructor() {
@@ -13,7 +16,7 @@ class Assets extends Component {
 
   componentWillMount() {
     axios
-      .get("http://10.189.184.144:8080/assets")
+      .get(URL)
       .then(response => {
         var mappedAssetNames = response.data.content.map(item => item.name);
         this.setState({
