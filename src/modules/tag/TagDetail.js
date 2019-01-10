@@ -3,36 +3,47 @@ import AppConfig from "../../config.json";
 import axios from "axios";
 
 const TAG_URL = AppConfig.ASSETS_TAGS + "/tags";
-const TAG_VALUE_URL = AppConfig.TAGVALUES + "/tagvalues"
+const TAG_HIST_VALUE_URL = AppConfig.TAGVALUES + "/tagvalues/history";
+const TAG_CURRENT_VALUE_URL = AppConfig.TAGVALUES + "/tagvalues/now";
 
 class TagDetail extends Component {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       detail: {},
-      values: []
+      current: 0,
+      history: []
     };
   }
 
   componentDidMount() {
     const tagId = this.props.match.params.id;
-    const tagName = this.props.match.params.name;
 
-    axios.get(TAG_URL + "/" + tagId).then(response => {
-      this.setState({ detail: response.data });
-    });
+    axios
+      .get(TAG_URL + "/" + tagId)
+      .then(response => {
+        this.setState({ detail: response.data });
+      })
+      .then(() => {
+        // chain next promise requests only when the last one is done.
+        const tagName = this.state.detail.name;
+        // get tag's current value
+        axios.get(TAG_CURRENT_VALUE_URL + "/" + tagName).then(response => {
+          this.setState({ current: response.data });
+        });
 
-    axios.get(TAG_VALUE_URL + "/" + tagName).then(response => {
-      this.setState({values: response.data});
-      console.log("this.state.values: " + this.state.values);
-    });
+        // get the tag's historical values
+        axios.get(TAG_HIST_VALUE_URL + "/" + tagName).then(response => {
+          this.setState({ history: response.data });
+        });
+      });
   }
 
   render() {
     return (
       <div>
         <div>
-          <h1>{this.state.detail.name}</h1>
+          <h1><span>{this.state.detail.name}</span>: <span>{Math.floor(this.state.current * 100) / 100} {this.state.detail.unit}</span></h1>
         </div>
         <table>
           <tbody>
