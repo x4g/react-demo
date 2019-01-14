@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import AppConfig from "../../config.json";
 import axios from "axios";
+import TagCurrentValue from "./TagCurrentValue.js";
 
 const TAG_URL = AppConfig.ASSETS_TAGS + "/tags";
-const TAG_HIST_VALUE_URL = AppConfig.TAGVALUES + "/tagvalues/history";
-const TAG_CURRENT_VALUE_URL = AppConfig.TAGVALUES + "/tagvalues/now";
+const TAG_HIST_VALUE_URL = AppConfig.ASSETS_TAGS + "/tagvalues/history";
+const TAG_CURRENT_VALUE_URL = AppConfig.TAGVALUES + "/gs-guide-websocket";
 
 class TagDetail extends Component {
   constructor() {
@@ -19,6 +20,7 @@ class TagDetail extends Component {
   componentDidMount() {
     const tagId = this.props.match.params.id;
 
+
     axios
       .get(TAG_URL + "/" + tagId)
       .then(response => {
@@ -27,6 +29,7 @@ class TagDetail extends Component {
       .then(() => {
         // chain next promise requests only when the last one is done.
         const tagName = this.state.detail.name;
+
         // get tag's current value
         axios.get(TAG_CURRENT_VALUE_URL + "/" + tagName).then(response => {
           this.setState({ current: response.data });
@@ -43,7 +46,13 @@ class TagDetail extends Component {
     return (
       <div>
         <div>
-          <h1><span>{this.state.detail.name}</span>: <span>{Math.floor(this.state.current * 100) / 100} {this.state.detail.unit}</span></h1>
+          <h1>
+            <span>{this.state.detail.name}</span>:{" "}
+            <span>
+              {Math.floor(this.state.current * 100) / 100}{" "}
+              {this.state.detail.unit}
+            </span>
+          </h1>
         </div>
         <table>
           <tbody>
@@ -103,6 +112,7 @@ class TagDetail extends Component {
             </tr>
           </tbody>
         </table>
+        <TagCurrentValue />
       </div>
     );
   }
