@@ -1,59 +1,60 @@
 import React, { Component } from "react";
-import SockJS from "sockjs";
-import Stomp from "stomp";
+import SockJS from "sockjs-client";
+import Stomp from "@stomp/stompjs";
 
 const WEB_SOCKET_ENDPOINT = "http://localhost:8999/gs-guide-websocket";
-const socket = SockJS(WEB_SOCKET_ENDPOINT);
+const socket = new SockJS(WEB_SOCKET_ENDPOINT);
 const ws = Stomp.over(socket);
 
 class TagCurrentValue extends React.Component {
-  constructor() {
-    this.state = {
-      ws,
-      timeStamp: Date.now(),
-      maxReconnect: 1
-    };
+//   constructor() {
+//     this.state = {
+//       ws,
+//       timeStamp: Date.now(),
+//       maxReconnect: 1
+//     };
 
-    this.defaultProps = {
-      name: "something",
-      maxReconnect: 5
-    };
-  }
+//     this.defaultProps = {
+//       name: "something",
+//       maxReconnect: 5
+//     };
+//   }
 
-  componentDidMount() {
-    this.setupWebSocket();
-  }
+//   componentDidMount() {
+//     this.setupWebSocket();
+//   }
 
-  setupWebSocket() {
-    const webSoc = this.state.ws;
-    webSoc.connect(
-      {},
-      this.connect
-    );
-    webSoc.message = body => this.setState({ timeStamp: Date.now() });
-    webSoc.error = err => {
-      if (this.state.maxReconnect > 0) {
-        this.setState(
-          { maxReconnect: this.state.maxReconnect - 1 },
-          this.connect
-        );
-      }
-    };
-  }
+//   setupWebSocket() {
+//     const webSoc = this.state.ws;
+//     webSoc.connect(
+//       {},
+//       this.connect
+//     );
+//     webSoc.message = body => this.setState({ timeStamp: Date.now() });
+//     webSoc.error = err => {
+//       if (this.state.maxReconnect > 0) {
+//         this.setState(
+//           { maxReconnect: this.state.maxReconnect - 1 },
+//           this.connect
+//         );
+//       }
+//     };
+//   }
 
-  connect = () => {
-    const channels = webSocketUrls[this.props.name];
-    this.setState({ maxReconnect: this.props.maxReconnect });
-    channels.forEach(channel => {
-      const webSoc = this.state.ws;
-      webSoc.subscribe(channel.route, channel.callback);
-      webSoc.send(
-        registration.route,
-        { timeStamp: this.state.timeStamp.toString() },
-        "timeStamp"
-      );
-    });
-  };
+//   connect = () => {
+//     const channels = webSocketUrls[this.props.name];
+//     this.setState({ maxReconnect: this.props.maxReconnect });
+//     channels.forEach(channel => {
+//       const webSoc = this.state.ws;
+//       webSoc.subscribe(channel.route, channel.callback);
+//       webSoc.send(
+//         registration.route,
+//         { timeStamp: this.state.timeStamp.toString() },
+//         "timeStamp"
+//       );
+//     });
+//   };
+
   render() {
     return <span />;
   }
