@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import SockJS from "sockjs-client";
-import Stomp from "@stomp/stompjs";
+import React, { Component } from "react"
+import WSClient from '../common/WSClient';
 
-const WEB_SOCKET_ENDPOINT = "http://localhost:8999/gs-guide-websocket";
-const socket = new SockJS(WEB_SOCKET_ENDPOINT);
-const ws = Stomp.over(socket);
+const WS_ENDPOINT = "http://localhost:8999/gs-guide-websocket";
+const socket = io.connect(WS_ENDPOINT);
+
+
 
 class TagCurrentValue extends React.Component {
 //   constructor() {
